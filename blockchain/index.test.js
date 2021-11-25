@@ -1,5 +1,5 @@
-const Blockchain = require("../blockchain");
-const Block = require("../block");
+const Blockchain = require("./index");
+const Block = require("./block");
 const { blockStatement, emptyTypeAnnotation } = require("@babel/types");
 
 describe("Blockchain", () => {
