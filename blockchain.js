@@ -19,8 +19,6 @@ class Blockchain {
 			return false;
 		}
 
-		let answer = true;
-
 		for (let i = 1; i < chain.length; i++) {
 			let currentBlock = chain[i];
 			let lastBlock = chain[i - 1];
@@ -30,6 +28,21 @@ class Blockchain {
 		}
 
 		return answer;
+	}
+
+	replaceChain(newChain) {
+		if (newChain.length <= this.chain.length) {
+			console.log("The incoming chain must be longer.");
+			return;
+		} else if (!this.isValidChain(newChain)) {
+			console.log("The incoming chain must be valid.");
+			return;
+		}
+
+		console.log("Replacing blockchain with the new chain.");
+		this.chain = newChain;
+		this.lastBlock = this.chain[this.chain.length - 1];
+		return;
 	}
 }
 
