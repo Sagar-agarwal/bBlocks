@@ -35,4 +35,8 @@ describe("Blockchain block", () => {
 	it("Block data is correct", () => {
 		expect(blockchain.lastBlock.data).toEqual(data);
 	});
+
+	it("Is a Valid Chain", () => {
+		expect(blockchain.isValidChain(blockchain.chain)).toBeTruthy();
+	});
 });
