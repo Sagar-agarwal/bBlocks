@@ -19,16 +19,17 @@ class Blockchain {
 			return false;
 		}
 
-		chain.forEach((block, index) => {
-			if (index !== 0) {
-				let lastBlock = chain[index - 1];
-				if (block.lastHash !== lastBlock.hash || block.hash !== Block.blockHash(block)) {
-					return false;
-				}
-			}
-		});
+		let answer = true;
 
-		return true;
+		for (let i = 1; i < chain.length; i++) {
+			let currentBlock = chain[i];
+			let lastBlock = chain[i - 1];
+			if (currentBlock.lastHash !== lastBlock.hash || currentBlock.hash !== Block.blockHash(currentBlock)) {
+				return false;
+			}
+		}
+
+		return answer;
 	}
 }
 
