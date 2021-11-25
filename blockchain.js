@@ -13,6 +13,23 @@ class Blockchain {
 
 		return block;
 	}
+
+	isValidChain(chain) {
+		if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) {
+			return false;
+		}
+
+		chain.forEach((block, index) => {
+			if (index !== 0) {
+				let lastBlock = chain[index - 1];
+				if (block.lastHash !== lastBlock.hash || block.hash !== Block.blockHash(block)) {
+					return false;
+				}
+			}
+		});
+
+		return true;
+	}
 }
 
 module.exports = Blockchain;
