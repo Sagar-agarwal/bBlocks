@@ -22,5 +22,8 @@
 	"homepage": "https://github.com/Sagar-agarwal/b_blocks#readme",
 	"devDependencies": {
 		"nodemon": "^2.0.15"
+	},
+	"dependencies": {
+		"crypto-js": "^4.1.1"
 	}
 }

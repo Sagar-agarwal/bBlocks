@@ -1,3 +1,5 @@
+const SHA256 = require("crypto-js/sha256");
+
 class Block {
 	constructor(timestamp, hash, lastHash, data) {
 		this.timestamp = timestamp;
@@ -9,8 +11,8 @@ class Block {
 	toString() {
 		return `Block -
             Timestamp : ${this.timestamp}
-            Hash      : ${this.hash}
-            Last Hash : ${this.lastHash}
+            Hash      : ${this.hash.substring(0, 10)}
+            Last Hash : ${this.lastHash.substring(0, 10)}
             Data      : ${this.data}`;
 	}
 
@@ -21,11 +23,13 @@ class Block {
 	static mineBlock(lastBlock, data) {
 		let timestamp = Date.now();
 		let lastHash = lastBlock.hash;
-		let hash = "todo-hash";
-
-		// let hash = Block.hash(timestamp, lastHash, data);
+		let hash = Block.hash(timestamp, lastHash, data);
 
 		return new this(timestamp, hash, lastHash, data);
+	}
+
+	static hash(timeStamp, lastHash, data) {
+		return SHA256(`${timeStamp}${lastHash}${data}`).toString();
 	}
 }
 
