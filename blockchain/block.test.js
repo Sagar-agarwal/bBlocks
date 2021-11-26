@@ -28,8 +28,17 @@ describe("Block", () => {
 		expect(block.data).toEqual("foo");
 	});
 
-	it("Generates the hash that matched the DIFFICULTY", () => {
-		expect(block.hash.substring(0, DIFFICULTY)).toEqual("0".repeat(DIFFICULTY));
+	it("Generates the hash that matched the difficulty", () => {
+		expect(block.hash.substring(0, block.difficulty)).toEqual("0".repeat(block.difficulty));
+	});
+
+	it("Increases the difficulty for slowly mined block", () => {
+		expect(Block.adjustDifficulty(block, block.timestamp + 1)).toEqual(block.difficulty + 1);
+		console.log(`difficulty >> ${block.difficulty}`);
+	});
+
+	it("Lowers the difficulty for slowly mined block", () => {
+		expect(Block.adjustDifficulty(block, block.timestamp + 360000)).toEqual(block.difficulty - 1);
 	});
 });
 
