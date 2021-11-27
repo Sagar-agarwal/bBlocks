@@ -40,4 +40,13 @@ describe("Transaction", () => {
 	it("Input the balance of wallet", () => {
 		expect(transaction.input.amount).toEqual(wallet.balance);
 	});
+
+	it("Validate a valid transaction", () => {
+		expect(Transaction.verifyTransaction(transaction)).toBeTruthy();
+	});
+
+	it("Invalidates a corrupt transaction", () => {
+		transaction.outputs[0].amount = 50000;
+		expect(Transaction.verifyTransaction(transaction)).toBeFalsy();
+	});
 });
