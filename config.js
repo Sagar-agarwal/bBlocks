@@ -3,4 +3,7 @@ const DIFFICULTY = 4;
 const NONCE = 0;
 const MINE_RATE = 3000;
 
-module.exports = { DIFFICULTY, NONCE, MINE_RATE };
+// Wallet
+const INITIAL_BALANCE = 500;
+
+module.exports = { DIFFICULTY, NONCE, MINE_RATE, INITIAL_BALANCE };
