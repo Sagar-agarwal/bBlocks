@@ -1,5 +1,5 @@
 // CONSTANTS
-const DIFFICULTY = 1;
+const DIFFICULTY = 2;
 const NONCE = 0;
 const MINE_RATE = 3000;
 

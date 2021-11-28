@@ -49,4 +49,35 @@ describe("Transaction", () => {
 		transaction.outputs[0].amount = 50000;
 		expect(Transaction.verifyTransaction(transaction)).toBeFalsy();
 	});
+
+	describe("Transaction update", () => {
+		let recipient2, amount2, updatedTransaction, recipient3, amount3;
+
+		beforeEach(() => {
+			recipient2 = "0000abcd1234";
+			amount2 = 100;
+			transaction.updateTransaction(wallet, recipient2, amount2);
+		});
+
+		it("Update transaction for valid `amount`", () => {
+			expect(transaction.input.amount).toEqual(wallet.balance);
+		});
+
+		it("Do NOT Update transaction for invalid `amount`", () => {
+			recipient3;
+			amount3 = 5000;
+			updatedTransaction = transaction.updateTransaction(wallet, recipient3, amount3);
+			expect(updatedTransaction).toBeUndefined();
+		});
+
+		it("Update transaction for other wallet", () => {
+			expect(transaction.outputs.find((output) => output.address === recipient2).amount).toEqual(amount2);
+		});
+
+		it("Subtracts the next amount from senders wallet balance", () => {
+			expect(transaction.outputs.find((output) => output.address == wallet.publicKey).amount).toEqual(
+				wallet.balance - amount - amount2
+			);
+		});
+	});
 });
