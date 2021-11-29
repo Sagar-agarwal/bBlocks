@@ -26,12 +26,13 @@ class Wallet {
 		}
 
 		let transaction = transactionPool.existingTransaction(this.publicKey);
-
 		transaction = transaction
 			? transaction.updateTransaction(this, recipient, amount)
 			: Transaction.newTransaction(this, recipient, amount);
 
 		transactionPool.updateOrAddTransaction(transaction);
+
+		return transaction;
 	}
 }
 
