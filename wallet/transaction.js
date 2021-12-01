@@ -41,10 +41,12 @@ class Transaction {
 	}
 
 	static rewardTransaction(minerWallet, blockchainWallet, outputs) {
-		return Transaction.transactionWithOutputs(blockchainWallet, {
-			amount: MINING_REWARD,
-			address: minerWallet.publicKey,
-		});
+		return Transaction.transactionWithOutputs(blockchainWallet, [
+			{
+				amount: MINING_REWARD,
+				address: minerWallet.publicKey,
+			},
+		]);
 	}
 
 	updateTransaction(senderWallet, recipient, amount) {
