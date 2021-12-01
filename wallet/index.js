@@ -34,6 +34,12 @@ class Wallet {
 
 		return transaction;
 	}
+
+	static blockchainWallet() {
+		const blockchainWallet = new this();
+		blockchainWallet.address = "bl0ckch@in-w@ll3t";
+		return blockchainWallet;
+	}
 }
 
 module.exports = Wallet;
