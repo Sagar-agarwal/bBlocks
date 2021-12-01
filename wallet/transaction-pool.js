@@ -28,7 +28,7 @@ class TransactionPool {
 				return;
 			}
 
-			if (!Transaction.validTransaction(transaction)) {
+			if (!Transaction.verifyTransaction(transaction)) {
 				console.log(`Invalid transaction signature from ${transaction.input.address}`);
 				return;
 			}

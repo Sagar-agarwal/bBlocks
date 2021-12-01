@@ -35,5 +35,31 @@ describe("Transaction Pool", () => {
 		expect(transactionPool.transactions.find((t) => t.id === newTransaction.id)).not.toEqual(oldTransactionJSON);
 	});
 
-	// it("Allow a second transaction to be added if the first has not been mined", () => {});
+	describe("mix valid and invalid transactions", () => {
+		let validTransactions;
+
+		beforeEach(() => {
+			validTransactions = [...transactionPool.transactions];
+
+			for (let i = 0; i < 10; i++) {
+				wallet = new Wallet();
+				recipient = `r3c1p13nt-${i}`;
+				amount = 50;
+				transaction = wallet.createTransaction(recipient, amount, transactionPool);
+				if (i % 2 === 0) {
+					transaction.input.amount = 9999;
+				} else {
+					validTransactions.push(transaction);
+				}
+			}
+		});
+
+		it("Show difference valid and corrupt transaction", () => {
+			expect(JSON.stringify(transactionPool.transactions)).not.toEqual(validTransactions);
+		});
+
+		it("Get valid transactions", () => {
+			expect(transactionPool.validTransactions()).toEqual(validTransactions);
+		});
+	});
 });
