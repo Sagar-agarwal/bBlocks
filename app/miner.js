@@ -17,3 +17,5 @@ class Miner {
 		// broadcast the new block to the network
 	}
 }
+
+module.exports = Miner;
