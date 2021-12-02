@@ -35,6 +35,12 @@ describe("Transaction Pool", () => {
 		expect(transactionPool.transactions.find((t) => t.id === newTransaction.id)).not.toEqual(oldTransactionJSON);
 	});
 
+	"Clear Transaction Pool",
+		() => {
+			transactionPool.clear();
+			expect(transactionPool.transactions).toEqual([]);
+		};
+
 	describe("mix valid and invalid transactions", () => {
 		let validTransactions;
 
